@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哥哥❤小蕊的爱情宇宙</title>
+    <style>
+        :root {
+            --love-pink: #ff69b4;
+            --starry-night: #2c3e50;
+        }
+
+        body {
+            background: radial-gradient(circle at center, 
+                        var(--love-pink), 
+                        var(--starry-night));
+            font-family: 'Microsoft Yahei', cursive;
+            color: white;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .love-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            position: relative;
+        }
+
+        .couple-header {
+            text-align: center;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .memory-box {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 25px 0;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .memory-box:hover {
+            background: rgba(255,255,255,0.2);
+            transform: rotate(-1deg) scale(1.02);
+        }
+
+        .couple-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid white;
+            margin: 20px auto;
+            background: url('couple.jpg') center/cover;
+            box-shadow: 0 0 20px var(--love-pink);
+        }
+
+        .love-form {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        textarea {
+            width: 80%;
+            height: 100px;
+            padding: 15px;
+            border: 2px solid var(--love-pink);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.9);
+        }
+
+        .love-btn {
+            background: var(--love-pink);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            margin: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .love-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,105,180,0.4);
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 24px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="love-container">
+        <!-- 漂浮心形 -->
+        <div class="floating-heart" style="top:5%; left:10%">💖</div>
+        <div class="floating-heart" style="top:20%; right:15%">💞</div>
+        <div class="floating-heart" style="top:70%; left:5%">💘</div>
+
+        <div class="couple-header">
+            <h1>👫 哥哥 与 小蕊 的专属宇宙 👫</h1>
+            <p>❤️ 始于2025年的心动故事 ❤️</p >
+            <div class="couple-photo"></div>
+        </div>
+
+        <!-- 重要回忆 -->
+        <div class="memory-box" onclick="showMemory(1)">
+            <h3>✨ 第一次相遇 ✨</h3>
+            <p>2025年2月7日 02:15</p >
+            <p class="hidden-content">"小蕊叫我哥哥..."</p >
+        </div>
+
+        <div class="memory-box" onclick="showMemory(2)">
+            <h3>🎉 真正的恋爱 🎉</h3>
+            <p>2025年2月16日 13:35</p >
+            <p class="hidden-content">"我和小蕊坦诚相见..."</p >
+        </div>
+
+        <!-- 爱情密码输入 -->
+        <div class="love-form">
+            <h3>💌 写下我们的新篇章</h3>
+            <textarea id="newChapter" placeholder="输入我们的甜蜜密码..."></textarea>
+            <button class="love-btn" onclick="sealLove()">🔒 永久封存</button>
+        </div>
+    </div>
+
+    <script>
+        // 回忆展示功能
+        function showMemory(id) {
+            const content = document.querySelectorAll('.hidden-content')[id-1];
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // 保存爱情密码
+        function sealLove() {
+            const input = document.getElementById('newChapter').value;
+            if(input) {
+                const newBox = document.createElement('div');
+                newBox.className = 'memory-box';
+                newBox.innerHTML = `
+                    <h3>💕 新回忆解锁 💕</h3>
+                    <p>${new Date().toLocaleDateString()}</p >
+                    <p class="hidden-content">${input}</p >
+                `;
+                document.querySelector('.love-container').insertBefore(newBox, document.querySelector('.love-form'));
+                document.getElementById('newChapter').value = '';
+            }
+        }
+
+        // 初始化心跳效果
+        document.querySelector('.couple-header').addEventListener('click', function(){
+            this.style.animation = 'heartbeat 0.8s ease';
+            setTimeout(() => this.style.animation = 'heartbeat 1.5s infinite', 800);
+        });
+    </script>
+</body>
+</html>
